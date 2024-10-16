@@ -23,7 +23,8 @@ restaurantRouter.post("/", async (req, res) => {
         location: location,
         cuisine: cuisine
     })
-    res.json(newRestaurant)
+    const allRestaurants = await Restaurant.findAll()
+    res.json(allRestaurants)
 })
 
 restaurantRouter.put("/:id", async (req, res) => {
@@ -36,7 +37,8 @@ restaurantRouter.put("/:id", async (req, res) => {
     },{
         where: {id: toChangeId}
     })
-    res.send("Done changing!")
+    const allRestaurants = await Restaurant.findAll()
+    res.json(allRestaurants)
 })
 
 restaurantRouter.delete("/:id", async (req, res) => {
@@ -44,7 +46,8 @@ restaurantRouter.delete("/:id", async (req, res) => {
     await Restaurant.destroy({
         where: {id: toDeleteId}
     })
-    res.send("Done deleting!")
+    const allRestaurants = await Restaurant.findAll()
+    res.json(allRestaurants)
 })
 
 module.exports = restaurantRouter
